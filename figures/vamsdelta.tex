@@ -1,0 +1,89 @@
+\begin{tikzpicture}
+    % Distance delta
+    \def\D{1.5}
+    \def\xzero{.4}
+    \def\yzero{.7}
+
+    \draw[|->] (0,0) -- (\xzero+2.5*\D,0)
+        node[anchor=west] {$x$};
+
+    % Pelaos' xcoordinates
+    \def\xpone{\xzero}
+    \def\xptwo{\xzero+\D}
+    \def\xpthree{\xzero+2*\D}
+    \def\xpfour{\xzero+2*\D}
+    \def\cabeza{.15}
+
+    % Stickmans/pelaos
+    \pelao{\xpone}{\yzero}{\cabeza}
+    \pelao{\xptwo}{\yzero}{\cabeza}
+    \pelao{\xpthree}{\yzero}{\cabeza}
+
+    % Deltas
+    \draw[|-|] (\xpone+.3,.5*\yzero)
+        -- (\xptwo-.3,.5*\yzero)
+        node[midway,above] {$\Delta$};
+    \draw[|-|] (\xptwo+.3,.5*\yzero)
+        -- (\xpthree-.3,.5*\yzero)
+        node[midway,above] {$\Delta$};
+
+    % GPS checks
+    \def\arrlen{.35}
+    \def\arrend{-.1}
+
+    % High freq checks
+    \draw[->] (\xpone-.1, \arrend-\arrlen)
+        -- (\xpone-.1, \arrend);
+    \draw[->] (\xptwo-.1, \arrend-\arrlen)
+        -- (\xptwo-.1, \arrend);
+    \draw[->] (\xpthree-.1, \arrend-\arrlen)
+        -- (\xpthree-.1, \arrend);
+
+    % Low freq checks
+    \draw[->,dashed]
+        (\xpone+.1, \arrend-\arrlen)
+        -- (\xpone+.1, \arrend);
+    \draw[->,dashed]
+        (\xpthree+.1, \arrend-\arrlen)
+        -- (\xpthree+.1, \arrend);
+
+    % Intervals
+    \draw[|-|] (\xpone-.1, \arrend-\arrlen-.3)
+        --
+        (\xptwo-.1, \arrend-\arrlen-.3)
+        node[midway,fill=white,inner sep=0]
+        {$\sigma\omega_1^{-1}$};
+    \draw[|-|,dashed]
+        (\xpone+.1, \arrend-\arrlen-.7)
+        --
+        (\xpthree+.1, \arrend-\arrlen-.7)
+        node[midway,fill=white,inner sep=0]
+        {$\sigma\omega_2^{-1}$};
+
+
+    %%%%%%%%
+    % VAMs
+    %%%%%%%%
+    % VAM1
+    \node[draw,anchor=south west] (VAM1)
+        at (\xptwo-.1, \yzero+\cabeza+.3)
+        {VAM};
+    \draw[->] (\xptwo-.1, \yzero+\cabeza)
+        -- (VAM1.south west);
+    % VAM2
+    \node[draw,anchor=south west] (VAM2)
+        at (\xpthree-.1, \yzero+\cabeza+.3)
+        {VAM};
+    \draw[->] (\xpthree-.1, \yzero+\cabeza)
+        -- (VAM2.south west);
+    % VAM2'
+    \node[draw,anchor=south west,dashed,
+        fill=gray!20!white] (VAM2p)
+        at (\xpthree+.1, \yzero+\cabeza+.25)
+        {VAM};
+    \draw[->,dashed]
+        (\xpthree+.1, \yzero+\cabeza)
+        -- (VAM2p.south west);
+\end{tikzpicture}
+
+

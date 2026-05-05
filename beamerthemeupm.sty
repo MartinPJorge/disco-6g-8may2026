@@ -1,0 +1,89 @@
+\mode<presentation>
+
+% Requirement
+\RequirePackage{tikz}
+
+% Settings
+\useinnertheme{upm}
+\useoutertheme{upm}
+\usecolortheme{upm}
+
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=true]  
+\setbeamertemplate{footline}{%
+    \vspace{-2em}
+    \ifnum\thepage>1\relax%
+    \hfill
+    \color{upmblue}
+    \insertframenumber/\inserttotalframenumber 
+    \hspace{1em}
+    \vspace{0.5em}
+   \fi
+}
+
+
+\setbeamertemplate{section page}{
+  \begin{tikzpicture}
+      \useasboundingbox (0,0) rectangle (\the\paperwidth,\the\paperheight);
+      \fill[color=upmblue] (-1,0) rectangle (\the\paperwidth,\the\paperheight+2);
+      \node[align=center, left] at (current page.center) {\usebeamerfont{title} \color{white} \insertsectionhead};
+  \end{tikzpicture}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HEADER LOGO COMMAND %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\headerlogo}{
+    \node (logo) at (0.86\paperwidth,0.6){\includegraphics[height=0.07\paperheight]{upm-transparent}};
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%% COVER LOGO COMMAND %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\logocover}{
+  \node[inner sep=0pt] (logo) at (0.5\paperwidth,0.72\paperheight){\includegraphics[height=0.4\paperheight]{logo-upm-transparent}};
+}
+\DeclareOption{polito}{
+    \renewcommand{\logocover}{
+      \node[inner sep=0pt] (logo) at (0.38\paperwidth,0.72\paperheight){\includegraphics[height=0.4\paperheight]{logo-upm}};
+      \node[inner sep=0pt] (logo) at (0.72\paperwidth,0.72\paperheight){\includegraphics[height=0.25\paperheight]{polito-logo}};
+    }
+
+
+  \renewcommand{\headerlogo}{
+    \node (logo) at (0.85\paperwidth,0.6){\includegraphics[height=0.07\paperheight]{upm-transparent}};
+    \node (logo) at (0.93\paperwidth,0.6){\includegraphics[height=0.07\paperheight]{polito-logo}};
+  }
+}
+\DeclareOption{politocnr}{
+    \renewcommand{\logocover}{
+      \node[inner sep=0pt] (logo-upm) at (0.22\paperwidth,0.72\paperheight){\includegraphics[height=0.3\paperheight]{logo-upm}};
+      \node[inner sep=0pt] (logo-polito) at (0.55\paperwidth,0.72\paperheight){\includegraphics[height=0.15\paperheight]{politecnicoditorino}};
+      \node[inner sep=0pt] (logo-cnr) at (0.83\paperwidth,0.72\paperheight){\includegraphics[height=0.12\paperheight]{cnrieiit}};
+    }
+
+
+  \renewcommand{\headerlogo}{
+    \node (logo) at (0.76\paperwidth,0.6){\includegraphics[height=0.07\paperheight]{upm}};
+    \node (logo) at (0.84\paperwidth,0.6){\includegraphics[height=0.07\paperheight]{polito-logo}};
+    \node (logo) at (0.93\paperwidth,0.6){\includegraphics[height=0.05\paperheight]{cnrieiit}};
+  }
+}
+\DeclareOption{girosiptc}{
+    \renewcommand{\logocover}{
+      \node[inner sep=0pt] (logo-iptc) at (0.15\paperwidth,0.75\paperheight){\includegraphics[height=0.27\paperheight]{logo-iptc-blanco-leyenda}};
+      \node[inner sep=0pt] (logo-upm) at (0.49\paperwidth,0.75\paperheight){\includegraphics[height=0.26\paperheight]{logo-leyenda-blanco}};
+      \node[inner sep=0pt] (logo-giros) at (0.84\paperwidth,0.75\paperheight){\includegraphics[height=0.17\paperheight]{giros-blanco-no-fondo}};
+    }
+
+
+  \renewcommand{\headerlogo}{
+    \node (logo) at (0.86\paperwidth,0.6){\includegraphics[height=0.07\paperheight]{upm-transparent-white}};
+  }
+}
+\ProcessOptions\relax
+
+
+\mode<all>
