@@ -7,6 +7,7 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{pgfplots}
+\usepackage[main=english, spanish]{babel}
 
 %\usepackage{gnuplot-lua-tikz}
 \usepackage{tikz}
@@ -77,7 +78,7 @@
 
 
 \title{NR sensing testbed \& Semantic Compression}
-\date{13 de marzo de 2025}
+\date{8 de mayo de 2025}
 \author{Pablo Fernández López\\Jorge Martín Pérez}
 
 \usepackage[spanish]{babel}
@@ -180,7 +181,58 @@
     \end{figure}
 \end{frame}
 
+\section{NR sensing testbed}
+\begin{frame}{\secname}
+    \begin{figure}
+        \includegraphics[width=\textwidth]{figures/5GDetectionPy.pdf}
+        \caption{Our testbed allows 5G signal capture, demodulation and labeling. With this data we can train the presence detection ML algorithms and then run inference with semantically compressed resource grids.}
+    \end{figure}
+\end{frame}
 
+\begin{frame}{\secname}
+    Our testbed:
+
+    \begin{itemize}
+        \item Allows sub-GHz 5G signal capture using COTS hardware (USRP B210).
+        \item Demodulation process runs in \textit{Python} thanks to the \href{https://github.com/catkira/py3gpp}{\textit{py3gpp}} library.
+        \item Implements GPU acceleration for processing of the captured signals via \href{https://cupy.dev/}{\textit{CuPy}}.
+        \item Performs automatic labeling of the captured frames via \href{https://docs.ultralytics.com/}{\textit{Ultralytics YOLO}}.
+    \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{\secname}
+    \begin{figure}
+        \centering
+            \begin{subfigure}[b]{0.6\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{figures/grid.png}
+            \caption{\label{fig:grid}}
+            \end{subfigure}
+        \quad
+            \begin{subfigure}[b]{0.35\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{figures/YOLO_detect.png}
+            \caption{\label{fig:yolo}}
+            \end{subfigure}
+        
+        \caption{Captured resource grid cropped to SSB region (\subref{fig:grid}) and simultaneous person detection for automatic labeling (\subref{fig:yolo}).}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}{\secname}
+    With this tools we:
+    
+    \begin{itemize}
+    \item Adapted a State of the Art Convolutional Neural Network to receive cropped resource grids as input.
+    \item Captured >19k frames for training and $\sim$800 for testing after applying semantic encoding.
+    \item Measured detection capabilities degradation and reconstructed files similarity with the original uncompressed files.
+    \end{itemize}
+\end{frame}
+
+\section{Results}
 
 \begin{frame}{\secname}
 
@@ -220,43 +272,7 @@
 
 \end{frame}
 
-
-
-
-\section{NR sensing testbed}
-\begin{frame}{\secname}
-    Tasks done:
-    \begin{itemize}
-        \item Implemented a person detection script based on \href{https://docs.ultralytics.com/}{\textit{Ultralytics YOLO}} to log human presence.
-        \item Implemented relative depth detection with \href{https://github.com/DepthAnything/Depth-Anything-V2}{\textit{Depth Anything V2}}.
-        \item Conducted preliminary tests in the selected emplacement for the capture campaign.
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{\secname}
-    Person and depth detection for automatic tagging of the data set.
-    \begin{figure}
-        \includegraphics[width=.8\textwidth]{figures/YOLO_detect1.png}
-        \caption{One person detected within virtual boundary}
-    \end{figure}
-\end{frame}
-
-\begin{frame}{\secname}
-    Person and depth detection for automatic tagging of the data set.
-    \begin{figure}
-        \includegraphics[width=.8\textwidth]{figures/YOLO_detect2.png}
-        \caption{Two people detected within virtual boundary}
-    \end{figure}
-\end{frame}
-
-\begin{frame}{\secname}
-    Pending tasks:
-    \begin{itemize}
-        \item Implementation, training, and testing of state-of-the-art CNN architectures for presence detection.
-        \item Inference testing with compressed resource grids.
-        \item Capture of a large real scenario dataset.
-    \end{itemize}
-\end{frame}
+\iffalse
 
 \section{Semantic Compression}
 \begin{frame}{\secname}
@@ -366,6 +382,6 @@
     \end{itemize}
 \end{frame}
 
-
+\fi
 
 \end{document}
